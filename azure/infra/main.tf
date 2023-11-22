@@ -6,9 +6,18 @@ provider "azurerm" {
   }
 }
 
+locals {
+  tags = {
+    environment = "demo"
+    owner = "lalyos"
+    source = "terraform"
+  }
+}
+
 resource "azurerm_resource_group" "example" {
   name     = "exampleTFResourceGroup"
   location = var.azure_location
+  tags = local.tags
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -16,6 +25,7 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = local.tags
 }
 
 resource "azurerm_subnet" "example" {
