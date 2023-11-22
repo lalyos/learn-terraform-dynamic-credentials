@@ -1,6 +1,11 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
+variable "owner_id" {
+  type        = string
+  description = "The Azure AD object ID of the user who will own the TFC application"
+}
+
 variable "tfc_azure_audience" {
   type        = string
   default     = "api://AzureADTokenExchange"
